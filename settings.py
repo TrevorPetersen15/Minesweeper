@@ -1,3 +1,4 @@
 WIDTH=960
 HEIGHT=480
-GRID_SIZE=8
+GRID_SIZE=6
+print("woof")
