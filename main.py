@@ -8,7 +8,7 @@ root=Tk()
 
 root.configure(bg="black")
 root.geometry (f'{settings.WIDTH}x{settings.HEIGHT}')
-root.title ("MINESWEEPER")
+root.title ("worst game man")
 root.resizable(False,False)
 
 top_frame=Frame(
