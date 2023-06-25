@@ -17,7 +17,7 @@ top_frame=Frame(
     width=settings.WIDTH,
     height=utils.height_prct(25)
 )
-top_frame.place(x=0,y=0)
+top_frame.place(x=10,y=0)
 
 left_frame=Frame(
     root,

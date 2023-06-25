@@ -8,7 +8,7 @@ class Cell:
     def create_btn_object(self,location):
         btn = Button(
             location
-            ,text="nope",
+            ,text="yeah",
 
         )
         btn.bind("<Button-1>",self.left_click_actions)
