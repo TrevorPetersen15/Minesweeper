@@ -1,4 +1,4 @@
 WIDTH=960
-HEIGHT=480
+HEIGHT=500
 GRID_SIZE=6
 print("woof")
