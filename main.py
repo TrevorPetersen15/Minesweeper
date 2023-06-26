@@ -45,4 +45,5 @@ for x in range(settings.GRID_SIZE):
 
     
 Cell.radommize_mines()
+
 root.mainloop()

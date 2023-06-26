@@ -1,5 +1,7 @@
 from tkinter import Button
 import random 
+import settings
+
 class Cell:
     all=[]
     def __init__(self,x,y,is_mine=False):
@@ -34,7 +36,10 @@ class Cell:
         
     @staticmethod
     def radommize_mines():
-        picked_cells=random.sample(Cell.all,9)
-        print (picked_cells)
+        picked_cells=random.sample(Cell.all,MINES_COUNT)
+        
+        for picked_cell in picked_cells:
+                picked_cell.is_mine=True
+                
     def __repr__(self):
-        return f"cell({self.x}),{self.y})"
+        return f"cell({self.x}),({self.y})"
