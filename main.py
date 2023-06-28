@@ -4,7 +4,6 @@ import settings
 
 from cell import Cell
 
-print("doggy")
 
 root=Tk()
 

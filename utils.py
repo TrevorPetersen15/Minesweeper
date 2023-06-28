@@ -1,5 +1,4 @@
 import settings
-print("boof")
 
 def height_prct(percentage):
         return (settings.HEIGHT/100)*percentage
