@@ -1,15 +1,21 @@
-from tkinter import Button
+from tkinter import Button ,Label
 import random 
-
+import ctypes
+import sys
 GRID_SIZE=6
+CELL_COUNT= GRID_SIZE**2
 MINES_COUNT=(GRID_SIZE**2)//4
 
 
 class Cell:
+    cell_count_label_object=None
     all=[]
+    cell_count=CELL_COUNT
     def __init__(self,x,y,is_mine=False):
         self.is_mine = is_mine
         self.x = x
+        self.is_opened = False
+        self.flagged = False
         self.y = y
         self.cell_btn_object= None
         
@@ -28,6 +34,21 @@ class Cell:
         btn.bind("<Button-3>",self.right_click_actions)
 
         self.cell_btn_object = btn
+        
+    @staticmethod
+    def create_cell_count_label(location):
+        lbl=Label(
+            location,
+            bg="black",
+            fg="white",
+            text=f"Cells Left:{CELL_COUNT-MINES_COUNT}" ,
+            width= 12,
+            height=3,
+            font=("",20) 
+        )
+        Cell.cell_count_label_object = lbl   
+    
+            
 
     def left_click_actions(self,event):
         if self.is_mine:
@@ -37,6 +58,14 @@ class Cell:
                 for cell in self.surronded_cells:
                     cell.show_cell() 
             self.show_cell()
+            # 
+            if Cell.cell_count== MINES_COUNT:
+                cell.show_cell()
+                ctypes.windll.user32.MessageBoxW(0,"YOU HAVE WON","GAME OVER",0)
+        
+        self.cell_btn_object.unbind("Button-1")
+        self.cell_btn_object.unbind("Button-3")
+
             
     def get_cell_by_axis(self,x,y):
         for cell in Cell.all:
@@ -67,13 +96,30 @@ class Cell:
         return counter
     
     def show_cell(self):
-        self.cell_btn_object.configure(text=self.surronded_cells_mines_length) 
+        if not self.is_opened:
+            Cell.cell_count -=1
+            self.cell_btn_object.configure(text=self.surronded_cells_mines_length)
+            if Cell.cell_count_label_object:
+                Cell.cell_count_label_object.configure(text=f"Cells Left:{Cell.cell_count}")
+            self.cell_btn_object.config(bg="SystemButtonFace")
+  
+        self.is_opened=True
+        
                
     def show_mine(self):
         self.cell_btn_object.config(bg="red")
-
+        ctypes.windll.user32.MessageBoxW(0,'You clicked on a mine', "game over",0)
+        sys.exit()
+                
     def right_click_actions(self,event):
-        print ("right click")
+        if not self.flagged:
+            self.cell_btn_object.config(bg="orange")
+            self.flagged=True
+        else:
+            self.cell_btn_object.config(bg="SystemButtonFace")
+            self.flagged=False
+        
+            
         
     @staticmethod
     def radommize_mines():

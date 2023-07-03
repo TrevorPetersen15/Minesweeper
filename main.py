@@ -18,7 +18,11 @@ top_frame=Frame(
     width=settings.WIDTH,
     height=utils.height_prct(25)
 )
-top_frame.place(x=10,y=0)
+top_frame.place(x=0,y=0)
+
+title= Label( top_frame,bg="black",fg="white",text="Minesweeper",font=("Serif",32))
+title.place(x=utils.width_prct(25),y=0)
+
 
 left_frame=Frame(
     root,
@@ -41,6 +45,9 @@ for x in range(settings.GRID_SIZE):
         c=Cell(x,y)
         c.create_btn_object(center_frame)
         c.cell_btn_object.grid(column=x,row=y)
+        
+Cell.create_cell_count_label(left_frame)
+Cell.cell_count_label_object.place(x=0,y=0)
 
     
 Cell.radommize_mines()
